@@ -4,7 +4,6 @@ class Pages extends Controller
 {
     public function __construct()
     {
-       
     }
     public function index()
     {
@@ -13,6 +12,6 @@ class Pages extends Controller
 
     public function about()
     {
-        $this->view('pages/about');
+        $this->view('pages/about',['title' => 'ABOUT']);
     }
 }
