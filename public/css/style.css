@@ -27,6 +27,7 @@ body
 /* ****
 This Is Login Style 
 **** */
+
 a
 {
  color: white;
@@ -55,6 +56,12 @@ input
     text-align: center;
     font-family: "Lucida Console", Monaco, monospace;
     padding: 0px;
+}
+.form-lo .error
+{
+    border: 1px  solid rgb(255, 0, 0);
+    box-shadow: 4px 4px 10px rgba(163, 74, 74, 0.486);
+    color: white;
 }
 input:hover,input:focus
 {
