@@ -24,7 +24,7 @@ class  Users extends Controller
         else
         {
             //check that username is uniqe
-            if ($this->userModel->findUserByUsename($data['username']))
+            if ($this->userModel->findUserByUsername($data['username']))
             {
                 $data['username_err'] = 'Username is already exist';
                 $error++;
@@ -63,6 +63,9 @@ class  Users extends Controller
             $data['username_err'] = 'Plese Enter Your Username !!';
             $error++;
         }
+        else if (!$this->userModel->findUserByUsername($data['username'])){
+            $data['username_err'] = 'Username Dose Not exist !!';
+        }
         //validate password
         if (empty($data['password']))
         {
@@ -100,6 +103,7 @@ class  Users extends Controller
                 if ($this->userModel->register($data))
                 {
                     //succsess
+                    flash('register_success', 'YOU ARE REGISTRED NOW JUST CONFIRM YOUR EMAIL TO LOGIN');
                     redirect('users/login');
                 }
                 else
@@ -149,7 +153,18 @@ class  Users extends Controller
             if(!$error)
             {
                 //validated
-                die('sucssess');
+                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+
+                if ($loggedInUser)
+                {
+                    //create session
+                    $this->craeteUserSession($loggedInUser);
+                }
+                else
+                {
+                    $data['password_err'] = 'Password Incorrect';
+                    $this->view('users/login', $data);
+                }
             }
             else{
                 
@@ -170,6 +185,33 @@ class  Users extends Controller
             //load view
             $this->view('users/login', $data);
            
+        }
+    }
+    public function craeteUserSession($user)
+    {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_email'] = $user->email;
+        $_SESSION['user_name'] = $user->username;
+        redirect('pages/index');
+    }
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
+        session_destroy();
+        redirect('users/login');
+    }
+
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['user_id']))
+        {
+            return  true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

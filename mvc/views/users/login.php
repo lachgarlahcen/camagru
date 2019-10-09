@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="container">
+<?php flash('register_success'); ?>
         <div class="logo">
             <img src="http://www.stickpng.com/assets/thumbs/584c4c1b1fc21103bb375bab.png" alt="intragram">
         </div>

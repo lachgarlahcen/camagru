@@ -9,7 +9,7 @@ class User
         $this->db = new Database;
     }
 
-    public function findUserByUsename($username)
+    public function findUserByUsername($username)
     {
         $this->db->query('SELECT * FROM users WHERE username = :username');
         $this->db->bind(':username', $username);
@@ -32,6 +32,24 @@ class User
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':password', $data['password']);
         return $this->db->execute();
+
+    }
+    //login user
+    public function login($username, $password)
+    {
+        $this->db->query('SELECT * FROM users WHERE username = :username');
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+        $hashed_password = $row->pass;
+        if (password_verify($password, $hashed_password))
+        {
+            return $row;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 }
