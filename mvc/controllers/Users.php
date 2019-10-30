@@ -6,6 +6,10 @@ class  Users extends Controller
     {
         $this->userModel = $this->model('User');
     }
+    public function windex()
+    {
+        $this->view('inc/404');
+    }
     public function validate_register(&$data)
     {
         $error = 0;
@@ -74,7 +78,7 @@ class  Users extends Controller
         }
         return $error;
     }
-    public function register()
+    public function wregister()
     {
         //check for post
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -134,7 +138,7 @@ class  Users extends Controller
            
         }
     }
-    public function login()
+    public function wlogin()
     {
         //check for post
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -194,7 +198,7 @@ class  Users extends Controller
         $_SESSION['user_name'] = $user->username;
         redirect('pages/index');
     }
-    public function logout()
+    public function wlogout()
     {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);

@@ -3,7 +3,7 @@
 class Core
 {
     protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
+    protected $currentMethod = 'windex';
     protected $params = [];
 
     public function __construct()
@@ -25,6 +25,7 @@ class Core
         //check for second parms in methods
         if (isset($url[1]))
         {
+            $url[1] = 'w'.$url[1];
             if (method_exists($this->currentController, $url[1]))
             {
                 $this->currentMethod = $url[1];

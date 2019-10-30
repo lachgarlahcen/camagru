@@ -1,7 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<h1>
-<?php
-echo $data['title'];
-?>
-</h1>
+<div id="camera">
+    <video id ='video' class="video-field">
+    </video>
+    <button id ='snap'>Take Photo!</button>
+    <canvas id='canvas'  class="photo-field">
+
+    </canvas>
+</div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

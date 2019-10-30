@@ -5,12 +5,12 @@ class Pages extends Controller
     public function __construct()
     {
     }
-    public function index()
+    public function windex()
     {
         $this->view('pages/index',['title' => 'welcome']);
     }
 
-    public function about()
+    public function wabout()
     {
         $this->view('pages/about',['title' => 'ABOUT']);
     }
