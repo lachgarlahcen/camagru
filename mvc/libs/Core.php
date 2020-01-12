@@ -10,7 +10,7 @@ class Core
     {
         $url = $this->getUrl();
         //look in the contrillers for the first value
-        if (file_exists('../mvc/controllers/'.$url[0].'.php'))
+        if (isset($url[0]) && file_exists('../mvc/controllers/'.$url[0].'.php'))
         {
             //if exist set it as current controller
             $this->currentController = ucwords($url[0]);
