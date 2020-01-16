@@ -2,7 +2,7 @@
 session_start();
 
 //flash message helper
-function flash($name = '', $message = '', $class = 'alert alert-success')
+function flash($name = '', $message = '', $class = 'alert alert-success text-center')
 {
     if (!empty($name))
     {

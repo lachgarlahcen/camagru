@@ -2,17 +2,18 @@
 
 <div class="container">
     <!-- Material form register -->
+    <?php flash('settings_message'); ?>
     <div class="card">
 
         <h5 class="card-header orange lighten-1 white-text text-center py-4">
-            <strong>Sign up</strong>
+            <strong>SETTINGS</strong>
         </h5>
 
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
 
             <!-- Form -->
-            <form class="text-center" style="color: #757575;" action="<?php echo URLROOT;?>/users/register"
+            <form class="text-center" style="color: #757575;" action="<?php echo URLROOT;?>/users/settings"
                 method="POST">
 
                 <div class="form-row">
@@ -33,37 +34,40 @@
                     <label for="email">E-mail <small class="text-danger">
                             <?php echo $data['email_err']; ?> </small></label>
                 </div>
-
                 <!-- Password -->
                 <div class="md-form">
-                    <input name="password" type="password" id="password" class="form-control"
-                        value="<?php echo $data['password']; ?>">
-                    <label for="password">Password <small class="text-danger ">
-                            <?php echo $data['password_err'] ;?>
+                    <input name="password" type="password" id="password" class="form-control" value="">
+                    <label for="passwordConfirm">New Password<small class="text-danger">
+                            <?php echo $data['new_password_err'] ;?>
                         </small></label>
                 </div>
-
+                <!-- Password2 -->
+                <div class="md-form">
+                    <input name="password2" type="password" id="password2" class="form-control" value="">
+                    <label for="passwordConfirm">New Password Confirm <small class="text-danger">
+                            <?php echo $data['confirm_password2_err'] ;?>
+                        </small></label>
+                </div>
+                <!-- Notifications -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                        <?php echo ($data['notifications'] ? 'checked' : 'unchecked') ?>
+                        id="defaultRegisterFormNewsletter" value="yes" name="notifications">
+                    <label class="custom-control-label" for="defaultRegisterFormNewsletter">Resive Notifications In
+                        email</label>
+                </div>
                 <!-- Confirm Password -->
                 <div class="md-form">
                     <input name="confirm_password" type="password" id="passwordConfirm" class="form-control"
                         value="<?php echo $data['confirm_password']; ?>">
-                    <label for="passwordConfirm">Password Confirm <small class="text-danger">
+                    <label for="passwordConfirm">Old Password Confirm <small class="text-danger">
                             <?php echo $data['confirm_password_err'] ;?>
                         </small></label>
                 </div>
-
-
                 <!-- Sign up button -->
                 <button class="btn btn-outline-orange lighten-1 btn-rounded btn-block my-4 waves-effect z-depth-0"
-                    type="submit">Sign in</button>
-                <div class="d-flex justify-content-around">
-                    <div>
-                        <!-- Register -->
-                        <p>Already a Member?
-                            <a href="<?php echo URLROOT;?>/users/login">Sign In</a>
-                        </p>
-                    </div>
-                </div>
+                    type="submit">UPDATE MY INFO</button>
+
             </form>
             <!-- Form -->
 
@@ -76,17 +80,19 @@
 try {
     var input_user = document.getElementById('username');
     var input_pass = document.getElementById('password');
+    var input_pass2 = document.getElementById('password2');
     var input_email = document.getElementById('email');
     var input_passconf = document.getElementById('passwordConfirm');
     var lable_user = input_user.nextElementSibling;
     var lable_pass = input_pass.nextElementSibling;
+    var lable_pass2 = input_pass2.nextElementSibling;
 
     if (input_user.value)
         lable_user.classList.add('active');
     if (input_pass.value)
         lable_pass.classList.add('active');
-
-
+    if (input_pass2.value)
+        lable_pass2.classList.add('active');
     input_user.addEventListener('focus', function() {
         lable_user.classList.add('active');
     });
@@ -102,6 +108,14 @@ try {
     input_pass.addEventListener('focusout', function() {
         if (!input_pass.value)
             lable_pass.classList.remove('active');
+    });
+    input_pass2.addEventListener('focus', function() {
+
+        lable_pass2.classList.add('active');
+    });
+    input_pass2.addEventListener('focusout', function() {
+        if (!input_pass2.value)
+            lable_pass2.classList.remove('active');
     });
     var lable_email = input_email.nextElementSibling;
     var lable_passconf = input_passconf.nextElementSibling;

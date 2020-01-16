@@ -83,7 +83,6 @@ class Database
     //get row count
     public function rowCount()
     {
-
         return $this->stmt->rowCount();
     }
 }
